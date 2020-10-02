@@ -164,8 +164,3 @@ def big_shoe_rebounds
     big_shoe_player[:shoe] > memo[:shoe] ? big_shoe_player : memo
   end[:rebounds]
 end
-
-puts big_shoe_rebounds
-      
-      
-      
