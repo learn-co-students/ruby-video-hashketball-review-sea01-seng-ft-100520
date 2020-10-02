@@ -159,7 +159,7 @@ def player_numbers(team)
 end
 
 def big_shoe_rebounds
-  game_hash.reduce({:shoe => 0, :rebounds => 0}) do |memo, (key, value)|
+  game_hash.reduce({:shoe => 0}) do |memo, (key, value)|
     big_shoe_player = value[:players].max_by {|player| player[:shoe]}
     big_shoe_player[:shoe] > memo[:shoe] ? big_shoe_player : memo
   end[:rebounds]
