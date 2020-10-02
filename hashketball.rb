@@ -1,4 +1,5 @@
 # Write your code below game_hash
+require 'pry'
 
 def game_hash
   {
@@ -127,4 +128,44 @@ def game_hash
   }
 end
 
-# Write code here
+def player_stats(player_name)
+  return game_hash.reduce('') do |memo, (key,value)|
+    obj = value[:players].find {|player| player_name == player[:player_name]}
+    obj == nil ? memo : obj
+  end
+end
+
+def num_points_scored(player_name)
+  player_stats(player_name)[:points]
+end
+
+def shoe_size(player_name)
+  player_stats(player_name)[:shoe]
+end
+
+def team_colors(team)
+  game_hash.reduce(nil) {|memo, (key,value)| value[:team_name] == team ? value[:colors] : memo}
+end
+
+def team_names
+  game_hash.collect {|key, value| value[:team_name]}
+end
+
+def player_numbers(team)
+  game_hash.reduce(nil) do |memo, (key, value)|
+    numbers = value[:players].collect {|player| player[:number]}
+    value[:team_name] == team ? numbers : memo
+  end
+end
+
+def big_shoe_rebounds
+  game_hash.reduce({:shoe => 0, :rebounds => 0}) do |memo, (key, value)|
+    big_shoe_player = value[:players].max_by {|player| player[:shoe]}
+    big_shoe_player[:shoe] > memo[:shoe] ? big_shoe_player : memo
+  end[:rebounds]
+end
+
+puts big_shoe_rebounds
+      
+      
+      
